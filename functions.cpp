@@ -36,21 +36,21 @@ void writeWordFrequencyToFile(const map<string, int>& wordFrequency, const strin
     outFile.close();
 }
 
-// Функция для удаления пунктуации из слова
-string removePunctuation(const string& word)
+// Функция предикат, которая возвращает true, если символ не является пунктуацией
+bool isNotPunct(unsigned char c) 
 {
-    string result;  // Строка для хранения результата без пунктуации
+    return !ispunct(c);
+}
+
+// Функция для удаления пунктуации из слова
+string removePunctuation(const string& word) 
+{
+    string result; // Строка для хранения результата без пунктуации
 
     // Копирование символов из word в result, если они не являются пунктуацией
-    copy_if(word.begin(), word.end(), back_inserter(result),
-        [](char c)  // Лямбда-функция как предикат для copy_if
-        {
-            // Приведение типа char к unsigned char для корректной работы ispunct
-            // и возврат true, если символ не является пунктуацией
-            return !ispunct(static_cast<unsigned char>(c));
-        });
+    copy_if(word.begin(), word.end(), back_inserter(result), isNotPunct);
 
-    return result;  // Возврат новой строки без пунктуации
+    return result; // Возврат новой строки без пунктуации
 }
 
 // Основная функция для подсчета частотности слов

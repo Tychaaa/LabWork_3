@@ -15,6 +15,9 @@ void displayWordFrequency(const map<string, int>& wordFrequency);
 // Функция для записи результатов в файл
 void writeWordFrequencyToFile(const map<string, int>& wordFrequency, const string& outputFilePath);
 
+// Функция предикат, которая возвращает true, если символ не является пунктуацией
+bool isNotPunct(unsigned char c);
+
 // Функция для удаления пунктуации из слова
 string removePunctuation(const string& word);
 
